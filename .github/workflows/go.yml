@@ -28,12 +28,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: codecov/codecov-action@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
       with:
-        files: ./coverage.txt # optional
-        verbose: true # optional (default = false)
         go-version: 1.18
+
     - name: Test
-      run: go mod download && go test -v ./... -coverprofile=coverage.txt -covermode=atomic
+      run: go mod download && go test -v ./... -coverprofile=coverage.txt -covermode=atomic && go test -v ./... -race
+
     - name: Upload
       run: bash <(curl -s https://codecov.io/bash)
