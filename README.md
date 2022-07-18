@@ -1,4 +1,4 @@
-# json
+# Json
 Simple JSON for Golang, like Python Json, easy to use.
 
 ## Features
