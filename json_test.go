@@ -23,6 +23,14 @@ func TestNewJson(t *testing.T) {
         }
     }
     {
+        var a int64 = 1
+        j := NewJson(a)
+        if !j.IsInt() {
+            t.Fail()
+            t.Log()
+        }
+    }
+    {
         j := NewJson(1.1)
         if !j.IsFloat() {
             t.Fail()
@@ -65,6 +73,14 @@ func TestNewJson(t *testing.T) {
         m["d"] = true
         j := NewJson(m)
         if !j.IsObject() {
+            t.Fail()
+            t.Log()
+        }
+    }
+    {
+        a := NewJson(true)
+        j := NewJson(a)
+        if !j.IsBool() {
             t.Fail()
             t.Log()
         }
@@ -244,6 +260,42 @@ func TestEqual(t *testing.T) {
         i := NewJson(None)
         if !j.Equal(i) {
             t.Fail()
+        }
+    }
+    {
+        j := NewArray()
+        j.Append(NewJson(1))
+        j.Append(NewJson("1"))
+        i := NewArray()
+        i.Append(NewJson(1))
+        i.Append(NewJson("1"))
+        if !j.Equal(i) {
+            t.Fail()
+            t.Log()
+        }
+    }
+    {
+        j := NewObject()
+        j.Set("a", NewJson("A"))
+        j.Set("b", NewJson("B"))
+        i := NewObject()
+        i.Set("a", NewJson("A"))
+        i.Set("b", NewJson("B"))
+        if !j.Equal(i) {
+            t.Fail()
+            t.Log()
+        }
+    }
+    {
+        j := NewObject()
+        j.Set("a", NewJson("a"))
+        j.Set("b", NewJson("a"))
+        i := NewObject()
+        i.Set("a", NewJson("A"))
+        i.Set("b", NewJson("B"))
+        if j.Equal(i) {
+            t.Fail()
+            t.Log()
         }
     }
 }
@@ -782,3 +834,29 @@ func TestValidate(t *testing.T) {
     }
 }
 
+func TestType(t *testing.T) {
+    {
+        j := NewJson(1)
+        if j.Type() != IntType {
+            t.Fail()
+            t.Log()
+        }
+    }
+}
+
+func TestCopy(t *testing.T) {
+    {
+        j := NewObject()
+        j.Set("a", NewJson("A"))
+        i := j.Copy()
+        if Dumps(j) != Dumps(i) {
+            t.Fail()
+            t.Log()
+        }
+        j.Set("a", NewJson("a"))
+        if Dumps(j) == Dumps(i) {
+            t.Fail()
+            t.Log()
+        }
+    }
+}
