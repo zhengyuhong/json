@@ -225,6 +225,27 @@ func TestEqual(t *testing.T) {
             t.Fail()
         }
     }
+    {
+        j := NewJson(true)
+        i := NewJson(true)
+        if !j.Equal(i) {
+            t.Fail()
+        }
+    }
+    {
+        j := NewJson(None)
+        i := NewJson(1)
+        if j.Equal(i) {
+            t.Fail()
+        }
+    }
+    {
+        j := NewJson(None)
+        i := NewJson(None)
+        if !j.Equal(i) {
+            t.Fail()
+        }
+    }
 }
 
 func TestSetGet(t *testing.T) {
@@ -750,3 +771,14 @@ func TestSwap(t *testing.T) {
         }
     }
 }
+
+func TestValidate(t *testing.T) {
+    {
+        s := ""
+        if validate(s) {
+            t.Fail()
+            t.Log()
+        }
+    }
+}
+
