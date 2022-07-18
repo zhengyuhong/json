@@ -311,6 +311,75 @@ func TestSetGet(t *testing.T) {
             t.Log()
         }
     }
+    {
+        arr := NewArray()
+        arr.Append(NewJson(1))
+        if !arr.Get(0).Equal(NewJson(1)) {
+            t.Fail()
+            t.Log()
+        }
+        arr.Set(0, NewJson(0))
+        if !arr.Get(0).Equal(NewJson(0)) {
+            t.Fail()
+            t.Log()
+        }
+    }
+    {
+        arr := NewArray()
+        arr.Append(NewJson(1))
+        if !arr.Get(0).Equal(NewJson(1)) {
+            t.Fail()
+            t.Log()
+        }
+        var index int8 = 0
+        arr.Set(index, NewJson(0))
+        if !arr.Get(0).Equal(NewJson(0)) {
+            t.Fail()
+            t.Log()
+        }
+    }
+    {
+        arr := NewArray()
+        arr.Append(NewJson(1))
+        if !arr.Get(0).Equal(NewJson(1)) {
+            t.Fail()
+            t.Log()
+        }
+        var index int16 = 0
+        arr.Set(index, NewJson(0))
+        if !arr.Get(0).Equal(NewJson(0)) {
+            t.Fail()
+            t.Log()
+        }
+    }
+    {
+        arr := NewArray()
+        arr.Append(NewJson(1))
+        if !arr.Get(0).Equal(NewJson(1)) {
+            t.Fail()
+            t.Log()
+        }
+        var index int32 = 0
+        arr.Set(index, NewJson(0))
+        if !arr.Get(0).Equal(NewJson(0)) {
+            t.Fail()
+            t.Log()
+        }
+    }
+    {
+        arr := NewArray()
+        arr.Append(NewJson(1))
+        if !arr.Get(0).Equal(NewJson(1)) {
+            t.Fail()
+            t.Log()
+        }
+        var index int64 = 0
+        arr.Set(index, NewJson(0))
+        if !arr.Get(0).Equal(NewJson(0)) {
+            t.Fail()
+            t.Log()
+        }
+    }
 }
 
 func TestString(t *testing.T) {
@@ -459,6 +528,14 @@ func TestContains(t *testing.T) {
             t.Log()
         }
     }
+    {
+        arr := NewArray()
+        arr.Append(NewJson(1))
+        if !arr.Contains(NewJson(1)) {
+            t.Fail()
+            t.Log()
+        }
+    }
 }
 
 func TestClear(t *testing.T) {
@@ -472,6 +549,19 @@ func TestClear(t *testing.T) {
             t.Log()
         }
         if j.Contains("b") != false {
+            t.Fail()
+            t.Log()
+        }
+    }
+    {
+        arr := NewArray()
+        arr.Append(NewJson(1))
+        if len(arr.Array()) != 1 {
+            t.Fail()
+            t.Log()
+        }
+        arr.Clear()
+        if len(arr.Array()) != 0 {
             t.Fail()
             t.Log()
         }
@@ -497,6 +587,16 @@ func TestUpdate(t *testing.T) {
 }
 
 func TestPop(t *testing.T) {
+    {
+        arr := NewArray()
+        arr.Append(NewJson(1))
+        arr.Append(NewJson(2))
+        arr.Pop(0)
+        if !arr.Get(0).Equal(NewJson(2)) {
+            t.Fail()
+            t.Log()
+        }
+    }
     {
         j := NewObject()
         j.Set("a", NewJson(1))
@@ -855,6 +955,19 @@ func TestCopy(t *testing.T) {
         }
         j.Set("a", NewJson("a"))
         if Dumps(j) == Dumps(i) {
+            t.Fail()
+            t.Log()
+        }
+    }
+}
+
+func TestReverse(t *testing.T) {
+    {
+        arr := NewArray()
+        arr.Append(NewJson(1))
+        arr.Append(NewJson(2))
+        arr.Reverse()
+        if !arr.Get(0).Equal(NewJson(2)) {
             t.Fail()
             t.Log()
         }
