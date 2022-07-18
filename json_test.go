@@ -275,6 +275,29 @@ func TestEqual(t *testing.T) {
         }
     }
     {
+        j := NewArray()
+        j.Append(NewJson(1))
+        j.Append(NewJson("1"))
+        i := NewArray()
+        i.Append(NewJson(1))
+        i.Append(NewJson(1))
+        if j.Equal(i) {
+            t.Fail()
+            t.Log()
+        }
+    }
+    {
+        j := NewArray()
+        j.Append(NewJson(1))
+        i := NewArray()
+        i.Append(NewJson(1))
+        i.Append(NewJson("1"))
+        if j.Equal(i) {
+            t.Fail()
+            t.Log()
+        }
+    }
+    {
         j := NewObject()
         j.Set("a", NewJson("A"))
         j.Set("b", NewJson("B"))
@@ -282,6 +305,31 @@ func TestEqual(t *testing.T) {
         i.Set("a", NewJson("A"))
         i.Set("b", NewJson("B"))
         if !j.Equal(i) {
+            t.Fail()
+            t.Log()
+        }
+    }
+    {
+        j := NewObject()
+        j.Set("a", NewJson("A"))
+        j.Set("b", NewJson("B"))
+        i := NewObject()
+        i.Set("a", NewJson("A"))
+        i.Set("b", NewJson("B"))
+        i.Set("c", NewJson("C"))
+        if j.Equal(i) {
+            t.Fail()
+            t.Log()
+        }
+    }
+    {
+        j := NewObject()
+        j.Set("a", NewJson("A"))
+        j.Set("b", NewJson("B"))
+        i := NewObject()
+        i.Set("a", NewJson("A"))
+        i.Set("c", NewJson("C"))
+        if j.Equal(i) {
             t.Fail()
             t.Log()
         }
@@ -307,6 +355,10 @@ func TestSetGet(t *testing.T) {
         j.Set("b", NewJson("b"))
         j.Set("c", NewJson("c"))
         if Dumps(j.Get("a")) != `"a"` {
+            t.Fail()
+            t.Log()
+        }
+        if !j.Get("d").IsNull() {
             t.Fail()
             t.Log()
         }
