@@ -5,7 +5,6 @@ import (
     "github.com/valyala/fastjson"
     "os"
     "testing"
-    //"time"
 )
 
 func TestNewJson(t *testing.T) {
