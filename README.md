@@ -1,3 +1,6 @@
+[![Build Status](https://github.com/zhengyuhong/json/actions/workflows/go.yml/badge.svg)](https://github.com/zhengyuhong/json/actions/workflows/go.yml)
+[![GoDoc](https://pkg.go.dev/badge/github.com/zhengyuhong/json)](https://pkg.go.dev/github.com/zhengyuhong/json)
+[![codecov](https://codecov.io/gh/zhengyuhong/json/branch/main/graph/badge.svg)](https://codecov.io/gh/zhengyuhong/fastjson)
 # Json
 Simple JSON for Golang, like Python Json, easy to use.
 
