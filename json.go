@@ -50,9 +50,7 @@ func NewJson[T ValueType](value ...T) *Json {
         if t, ok := v.(*Json); ok && t == nil {
             break
         }
-        if err := j.set(v); err != nil {
-            return nil
-        }
+        j.set(v)
     }
     return j
 }
@@ -103,9 +101,7 @@ func (j *Json) set(value any) error {
         arrayValue := []*Json{}
         for _, value := range array {
             e := &Json{}
-            if err := e.set(value); err != nil {
-                return err
-            }
+            e.set(value)
             arrayValue = append(arrayValue, e)
         }
         j.value = arrayValue
@@ -115,9 +111,7 @@ func (j *Json) set(value any) error {
         objectValue := make(map[string]*Json, 0)
         for key, value := range object {
             v := &Json{}
-            if err := v.set(value); err != nil {
-                return err
-            }
+            v.set(value)
             objectValue[key] = v
         }
         j.value = objectValue
@@ -144,9 +138,7 @@ func Loads(s string) *Json {
     if err := decoder.Decode(&value); err != nil {
         return nil
     }
-    if j.set(value) != nil {
-        return nil
-    }
+    j.set(value)
     return j
 }
 
